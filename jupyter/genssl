@@ -1,0 +1,1 @@
+openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout key.key -out cert.pem -subj "/C=US/ST=New York/L=New York"
