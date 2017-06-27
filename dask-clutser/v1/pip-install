@@ -1,0 +1,7 @@
+#!/bin/sh
+for line in $(cat requirements.txt)
+do
+  pip install $line
+done
+rm requirements.txt $0
+echo done installing pip packages

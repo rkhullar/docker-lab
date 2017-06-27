@@ -1,0 +1,1 @@
+docker create --name notebook --init -p 8888:8888 -e PASS=sha1:081f5d0adb9f:8d5b02e6ae39ee1996bf041d6495520b85582c78 notebook
