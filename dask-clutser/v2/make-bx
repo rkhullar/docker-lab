@@ -1,0 +1,2 @@
+#!/bin/bash
+bx ic create --name $1 --privileged -p 8787:8787 -p 443:5000 voice_test/dask-cluster /sbin/init

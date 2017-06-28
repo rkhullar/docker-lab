@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$CLUSTERIP" = "" ]; then
+    dask-scheduler
+else
+    ADDR="tcp://$CLUSTERIP:$PORT"
+    if [ "$MODE" = "jupyter" ]; then
+        jupyter notebook --ip '*' --port 8888 
+    elif [ "$MODE" = "api" ]; then
+        echo "not supported yet" && yes
+    else
+        dask-worker $ADDR
+    fi
+fi
