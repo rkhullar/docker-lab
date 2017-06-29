@@ -1,15 +1,22 @@
 ## Bluemix Adventures - Part 1
 Rajan Khullar
 
+### [What is Docker][docker-what]
+Docker makes it easier to deploy applications by allowing environents to be consistent from development to production. A dockerfile containes instructions to build a dockerfile. The instrucions include what base image to use, which packages to install, application code, ports, commands, etc. Like virtual machines docker containers provide isolated environments for software to run. Unlike VMs the containers do not include a full operating system. "This makes for efficient, lightweight, self-contained systems and guarantees that software will always run the same, regardless of where it’s deployed."
+
+|       Containers        |          Virtual Machines           |
+| :---------------------: | :---------------------------------: |
+| ![container][container] | ![virtual-machine][virtual-machine] |
+
 ### Objective
-Create and deploy a hello world Flask application as a Docker image on Bluemix.
+Create and deploy a hello world Flask application on Bluemix through IBM Containers.
 
 ### Prerequisistes
-1. [Docker][docker]
-2. [Bluemix CLI][bx-cli]
-3. [Container Plugin][bx-ic]
+[Docker][docker] - [Bluemix CLI][bx-cli] - [Container Plugin][bx-ic]
+
 
 ### Write the application
+
 ``` sh
 mkdir path/to/project
 cd path/to/project
@@ -69,7 +76,10 @@ curl localhost:HPORT
 docker stop CONTAINER
 ```
 
-### Deploy on Bluemix
+### Deploy to Bluemix
+
+The docker image must be uploaded to bluemix by either building the dockerfile with the container plugin, or by copying the image from another registry. 
+
 ``` sh
 # login to bluemix console
 bx login
@@ -77,6 +87,11 @@ bx login
 bx ic init
 # build and push image 
 bx ic build -t TAG .
+```
+
+Now that the image exists on bluemix's registry, deployment can continue with either the console or the web portal. The following walks through how to create a single container for your application and give it a public IP address.
+
+``` sh
 # list available images
 bx ic images
 # show repository name
@@ -95,6 +110,20 @@ bx ic start CONTAINER
 curl IP:HPORT
 ```
 
+We can easily add a route and some security by creating a container group. First create a route  through the bluemix plugin. Then use the web portal to create the group and deploy the application.
+
+``` sh
+# the default domain is mybluemix.net
+bx app route-create SPACE DOMAIN -n HOST
+bx cf routes
+```
+
+![bluemix group](images/bxgroup.png)
+
 [docker]: www.docker.com/
+[docker-what]: www.docker.com/what-docker
 [bx-cli]: clis.ng.bluemix.net/ui/home.html
 [bx-ic]: console.bluemix.net/docs/containers/container_cli_cfic_install.html#install_plugin
+[container]: https://www.docker.com/sites/default/files/Container%402x.png
+[virtual-machine]: https://www.docker.com/sites/default/files/VM%402x.png
+[diff]: www.docker.com/what-container
