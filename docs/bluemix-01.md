@@ -14,6 +14,7 @@ Create and deploy a hello world Flask application on Bluemix through IBM Contain
 ### Prerequisistes
 [Docker][docker] - [Bluemix CLI][bx-cli] - [Container Plugin][bx-ic]
 
+<div style="page-break-after: always;"></div>
 
 ### Write the application
 
@@ -53,6 +54,8 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### Test your application
 ``` sh
 python server.py
@@ -88,6 +91,8 @@ bx ic init
 # build and push image 
 bx ic build -t TAG .
 ```
+
+<div style="page-break-after: always;"></div>
 
 Now that the image exists on bluemix's registry, deployment can continue with either the console or the web portal. The following walks through how to create a single container for your application and give it a public IP address.
 
