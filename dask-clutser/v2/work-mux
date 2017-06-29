@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$MASTERIP" = "" ]; then
-    dask-scheduler
+    dask-scheduler --nthreads 1
 else
     export ADDR="tcp://$MASTERIP:8786"
     if [ "$MODE" = "jupyter" ]; then
