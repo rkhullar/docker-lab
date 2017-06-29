@@ -1,3 +1,8 @@
 .git
+build
 make
 make-bx
+make-vol
+genpass
+start-notebook
+password.txt

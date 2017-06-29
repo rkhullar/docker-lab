@@ -1,2 +1,11 @@
-#!/bin/bash
-docker create --name $1 --privileged -p 8787:8787 -p 443:5000 dask-cluster/base /sbin/init
+if [ "$1" == "master" ]; then
+    docker create --name $1 -v volume:/mnt/volume -p 8787:8787 daskdev
+elif [ "$1" == "worker" ]; then
+    docker create -v volume:/mnt/volume -e MASTERIP=$2 daskdev
+elif [ "$1" == "jupyter" ]; then
+    docker create --name $1 -v volume:/mnt/volume -p 8888:8888 -e MASTERIP=$2 -e MODE=jupyter PASS=`cat password.txt` daskdev
+elif [ "$1" == "api" ]; then
+    echo "not implemented yet"
+else
+    echo "invalid option"
+fi

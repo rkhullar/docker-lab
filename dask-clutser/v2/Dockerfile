@@ -10,7 +10,7 @@ RUN ./pip-install && rm requirements.txt pip-install
 
 EXPOSE 5000 8787 8888
 
-ENV NBUSER=git NBUID=1000 PORT=8888 PASS='' HOME=/home/git
+ENV NBUSER=git NBUID=1000 PASS='' HOME=/home/git
 
 RUN useradd -m -s /bin/bash -N -u $NBUID $NBUSER
 
