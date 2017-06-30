@@ -1,4 +1,4 @@
 #!/bin/bash
 cd /home/git/work
 chown git:users ./
-gosu work-mux
+gosu git work-mux
