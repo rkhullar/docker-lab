@@ -1,0 +1,12 @@
+#!/bin/bash
+export PASS='' PASS2=''
+read -s -p "Enter Password: " PASS
+echo
+read -s -p "Enter Password: " PASS2
+echo
+if [ $PASS = $PASS2 ]; then
+    python -c "from notebook.auth import passwd; import os; h=passwd(os.getenv('PASS')); print(h)" > password.txt
+    echo "wrote secret to password.txt"
+else
+    echo "error: passwords do not match"
+fi

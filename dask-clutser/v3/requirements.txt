@@ -1,0 +1,8 @@
+dumb-init
+numpy scipy Cython
+pillow graphviz
+matplotlib pandas sklearn
+tornado bokeh
+fastparquet s3fs
+dask distributed
+ipython jupyter

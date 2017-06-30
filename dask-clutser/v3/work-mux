@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$MASTERIP" = "" ]; then
+    dask-scheduler
+else
+    export ADDR="tcp://$MASTERIP:8786"
+    if [ "$MODE" = "jupyter" ]; then
+        jupyter notebook --ip '*' --port 8888 --no-browser --NotebookApp.password=$PASS
+    elif [ "$MODE" = "api" ]; then
+        echo "not supported yet" && yes
+    else
+        echo $ADDR
+        dask-worker $ADDR --nthreads 1
+    fi
+fi

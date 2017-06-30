@@ -1,0 +1,7 @@
+.git
+build
+make
+make-vol
+genpass
+password.txt
+temp
