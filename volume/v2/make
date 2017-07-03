@@ -1,1 +1,1 @@
-docker create --name test -v volume:/mnt/volume test
+docker create --name test -v notebooks:/mnt/notebooks -v data:/mnt/data test

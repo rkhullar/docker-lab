@@ -1,0 +1,44 @@
+#!/bin/bash
+
+function setup 
+{
+  if [ -d /mnt/$1 ]; then
+    if [ ! -d /mnt/$1/space ]; then
+      gpasswd -a git root
+      chmod 775 /mnt/$1
+      gosu git mkdir -p /mnt/$1/space
+      gpasswd -d git root
+      chmod 755 /mnt/$1
+    fi
+    gosu git ln -sf /mnt/$1/space /home/git/$1
+  else
+    echo gosu git mkdir /home/git/$1
+  fi
+}
+
+function init
+{
+  setup notebooks
+  setup data
+  echo work > /root/control
+}
+
+
+function main
+{
+  if [ -f /root/control ]; then
+    CONTROL=`cat /mnt/test`
+    if [ "$CONTROL"=="work" ]; then
+      echo working
+      gosu git work-mux
+    else
+      echo "error: invalid control"
+    fi
+  else
+    echo "initializing"
+    init
+    main
+  fi
+}
+
+main

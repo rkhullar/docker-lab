@@ -12,8 +12,8 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 RUN pip install dumb-init
 
 WORKDIR /usr/local/bin
-COPY work-mux prep-work-mux ./
-RUN chmod +rx work-mux prep-work-mux
+COPY work-mux init-mux ./
+RUN chmod +rx work-mux init-mux
 
 ENV NBUSER=git NBUID=1000 PASS='' HOME=/home/git
 
@@ -22,11 +22,9 @@ RUN useradd -m -s /bin/bash -N -u $NBUID $NBUSER
 USER $NBUSER 
 WORKDIR $HOME
 
-RUN ln -s /mnt/volume work
-
 USER root
-WORKDIR $HOME/work
+WORKDIR $HOME
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
 
-CMD ["prep-work-mux"]
+CMD ["init-mux"]
