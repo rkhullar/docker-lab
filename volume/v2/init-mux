@@ -12,7 +12,7 @@ function setup
     fi
     gosu git ln -sf /mnt/$1/space /home/git/$1
   else
-    echo gosu git mkdir /home/git/$1
+    gosu git mkdir /home/git/$1
   fi
 }
 
