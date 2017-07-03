@@ -1,0 +1,2 @@
+docker volume create data
+docker volume create notebooks
