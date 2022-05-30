@@ -1,13 +1,9 @@
-FROM python:3.6.1-slim
-
+ARG PYTHON_VERSION
+FROM python:${PYTHON_VERSION}-alpine
 USER root
-
 WORKDIR /root
-
-RUN pip install Flask
-
-EXPOSE 5000
-
+RUN apk install --no-cache jq && pip install flask
 COPY server.py server.py
-
+RUN --mount=type=secret,id=a --mount=type=secret,id=b \
+    ./install-secrets.sh && rm install-secrets.sh
 CMD ["python", "server.py"]
