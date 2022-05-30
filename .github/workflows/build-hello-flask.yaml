@@ -1,0 +1,30 @@
+name: build-hello-flask
+
+on:
+  push:
+    branches:
+      - main
+      - feature/test-docker-workflow
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: rkhullar/workflows/.github/workflows/build-docker-ecr.yaml@feature/pilot
+    with:
+      name: docker-lab-hello-flask
+      region: us-east-1
+      context: hello-flask
+    secrets:
+      ecr_access_key: ${{ secrets.ECR_ACCESS_KEY }}
+      ecr_secret_key: ${{ secrets.ECR_SECRET_KEY }}
+      build_args: |
+        PYTHON_VERSION=3.10
+      build_secrets: |
+        a=hello
+        b=world
