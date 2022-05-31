@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   build:
-    uses: rkhullar/workflows/.github/workflows/build-docker-ecr.yaml
+    uses: rkhullar/workflows/.github/workflows/build-docker-ecr.yaml@main
     with:
       name: docker-lab-hello-flask
       region: us-east-1
