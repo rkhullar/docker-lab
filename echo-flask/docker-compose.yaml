@@ -1,0 +1,9 @@
+services:
+  server:
+    build: .
+    image: echo-flask
+    ports:
+      - "8000:8000" # host:container
+    environment:
+      - SERVICE_NAME=test
+      - SERVICE_PORT=8000
